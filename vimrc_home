@@ -1,0 +1,52 @@
+"---------------------------------------------------------
+""
+" vundle 环境设置
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+" " 缩进提示线
+Plugin 'nathanaelkane/vim-indent-guides'
+" " 文件树形目录
+Plugin 'scrooloose/nerdtree'
+" " jedi
+Plugin 'davidhalter/jedi-vim'
+" Git 
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+"
+" " " 插件列表结束
+call vundle#end()
+"
+" ">>>> INDENT options
+" " 随 vim 自启动
+let g:indent_guides_enable_on_vim_startup=1
+" 按F12调出/隐藏NERDTree
+map <F12> :NERDTreeToggle<CR>
+" 是否显示隐藏文件
+let NERDTreeShowHidden=1
+" 忽略一下文件的显示
+let NERDTreeIgnore=['\.pyc','\~$','\.swp']
+" ">>>> NERDTree options
+autocmd vimenter * NERDTree
+"
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+"---------------
+" " 从第二层开始可视化显示缩进
+let g:indent_guides_start_level=2
+" " 色块宽度
+let g:indent_guides_guide_size=1
+"---------------
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ "Unknown"   : "?"
+    \ }
